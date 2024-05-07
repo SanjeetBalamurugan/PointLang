@@ -13,6 +13,9 @@
 
 # Compiled Dynamic libraries
 *.so
+!vendor/premake/example.so
+!vendor/premake/libluasocket.so
+
 *.dylib
 *.dll
 
@@ -30,3 +33,10 @@
 *.exe
 *.out
 *.app
+
+# MakeFiles
+*.make
+Makefile
+
+bin/
+obj/
