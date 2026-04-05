@@ -1,7 +1,7 @@
 # Create Build Files
 edit="gmake"
 
-./vendor/premake/premake5 $edit
+./gen.sh $edit
 make
 if [[ $? == 0 ]]; then
   printf "PointLang StartsHere\n\n"

@@ -15,12 +15,8 @@ local function get_program_path(program_name)
     command = "where"
   end
   local handle = io.popen(command.." "..program_name)
-  
-  if handle == nil then
-    return nil
-  end
 
-  local path = handle:read("a")
+  local path = handle:read("*a")
   handle:close()
   return path
 end
@@ -37,7 +33,7 @@ project "PointLang"
    files { "src/**.h", "src/**.cpp" }
 
   local mold = get_program_path("mold")
-  if mold ~= nil then
+  if mold ~= "" then
     linkoptions { "-fuse-ld=mold" }
   end
 
