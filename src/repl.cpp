@@ -9,10 +9,14 @@ void Repl::repl_start() {
   while (true) {
     printf("%c ", this->m_prompt_char);
     std::string prompt = "";
-    std::cin >> prompt;
+    std::getline(std::cin, prompt);
 
     if (!prompt.empty()) {
       on_command_entered(prompt);
     }
+    else {
+      continue;
+    }
+    printf("\n");
   }
 }
