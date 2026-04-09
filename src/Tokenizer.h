@@ -10,8 +10,8 @@ enum TokenType {
   Let,
   Mut,
   Eq,
-  SemiColan,
-  Colan,
+  SemiColon,
+  Colon,
   DataType
 };
 
@@ -39,11 +39,11 @@ struct Token {
     case TokenType::Eq:
       printf("[Eq]\n");
       break;
-    case TokenType::SemiColan:
-      printf("[SemiColan]\n");
+    case TokenType::SemiColon:
+      printf("[SemiColon]\n");
       break;
-    case TokenType::Colan:
-      printf("[Colan]\n");
+    case TokenType::Colon:
+      printf("[Colon]\n");
       break;
     case TokenType::DataType:
       printf("[DataType: %s]\n", this->value.data());

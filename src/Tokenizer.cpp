@@ -8,46 +8,31 @@
 const std::vector<std::string> datatypes = {"int", "float"};
 
 void Tokenizer::tokenize(const std::string &s) {
-  int len = s.length();
   std::string tmp = "";
+  
+  for (int i = 0; i < s.length(); i++) {
+     char c = s.at(i);
+     bool binop = Utils::is_binop(c);
 
-  for (int i = 0; i < len; i++) {
-    char c = s.at(i);
-    bool binop = Utils::is_binop(c);
-
-    if (c == ' ') {
-      this->process_tokens(tmp);
-      tmp = "";
-      continue;
-    } else if (binop) {
-      if (!tmp.empty()) {
+     if (c == ' ' || binop || c == ':' || c == '=' || c == ';') {
+       if (!tmp.empty()) {
         this->process_tokens(tmp);
+        tmp = "";
       }
-      std::string k(1, c);
-      this->m_tokens.emplace_back(
-          Token{.type = TokenType::BinaryOp, .value = k});
-      tmp = "";
-      continue;
-    } else if (c == ':') {
-      if (!tmp.empty()) {
-        this->process_tokens(tmp);
-      }
-      this->m_tokens.emplace_back(Token{.type = TokenType::Colan});
-      tmp = "";
-      continue;
-    } else if (Utils::contains(datatypes, tmp)) {
-      this->process_tokens(tmp);
-      tmp = c;
-      continue;
-    } else if (c == '=') {
-      this->m_tokens.emplace_back(Token{.type = TokenType::Eq});
-      continue;
-    } else if (c == ';') {
-      this->m_tokens.emplace_back(Token{.type = TokenType::SemiColan});
-      continue;
-    }
 
-    tmp += c;
+      if (binop) {
+        this->m_tokens.emplace_back(Token{.type = TokenType::BinaryOp, .value = std::string(1, c)});
+      } else if (c == ':') {
+        this->m_tokens.emplace_back(Token{.type = TokenType::Colon});
+      } else if (c == '=') {
+        this->m_tokens.emplace_back(Token{.type = TokenType::Eq});
+      } else if (c == ';') {
+        this->m_tokens.emplace_back(Token{.type = TokenType::SemiColon});
+      }
+      continue;
+     }
+
+     tmp += c;
   }
 
   if (!tmp.empty()) {
