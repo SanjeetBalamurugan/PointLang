@@ -5,5 +5,5 @@ edit="gmake"
 make
 if [[ $? == 0 ]]; then
   printf "PointLang StartsHere\n\n"
-  ./bin/Debug/PointLang
+  ./bin/Debug/PointLang $1
 fi
